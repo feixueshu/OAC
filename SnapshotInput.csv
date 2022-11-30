@@ -1,0 +1,2 @@
+indexNumber,idcs_instance,clientid_secret,username,password,resource_scope,oac_instance,snapshot_name,bucket_name,oci_region,oci_tenancyId,oci_userId,oci_keyFingerprint,oci_privateKey,snapshot_folder,snapshot_password
+0,idcs-ca143233318.identity.oraclecloud.com,ZXoycXhmZzN,bob.fei@oracle.com,123456,https://p3msa.analytics.ocp.oraclecloud.comurn:opc:resource:consumer::all,oac20220808-se-nt.analytics.ocp.oraclecloud.com,mysnapshot,bucket-oac,ap-tokyo-1,ocid1.tenancy.oc1..,ocid1.user.oc1..,02:c5:d1,LS0tLS0,file:///myfolder/,Password123
