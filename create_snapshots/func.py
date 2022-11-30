@@ -120,6 +120,7 @@ def handler(ctx, data: io.BytesIO = None):
                     'password': password,
                     'scope': resource_scope
                 }
+                #IDCS TOKENを取得
                 response_rest = requests.post('https://' + idcs_instance + '/oauth2/v1/token', headers=headers, data=data)
                 logging.getLogger().info("requests.post.token")
 
@@ -187,7 +188,7 @@ def handler(ctx, data: io.BytesIO = None):
                     'Authorization': 'Bearer ' + access_token,
                     'Content-Type': 'application/json'
                 }
-
+                #スナップショットを作成
                 response_rest = requests.post('https://' + oac_instance + '/api/20210901/snapshots', headers=headers, data=snapshot_str)
                 logging.getLogger().info("requests.post.snapshot")
                 #出力CSVファイルをバケットにアップロードし、OACの出力データセットを作成
