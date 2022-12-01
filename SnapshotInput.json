@@ -1,0 +1,18 @@
+{
+	"idcs_instance":"idcs-f6.identity.oraclecloud.com",
+	"clientid_secret":"ZbTJlcDNtc2FfQVBQSUQ6M",
+	"username":"bob.fei@oracle.com",
+	"password":"123456",
+	"resource_scope":"https://a.analytics.ocp.oraclecloud.comurn:opc:resource:consumer::all",
+	"oac_instance":"oac-seod-nt.analytics.ocp.oraclecloud.com",
+	"snapshot_name":"mysnapshot",
+	"bucket_name":"bucket-oac",
+	"oci_region":"ap-tokyo-1",
+	"oci_tenancyId":"ocid1.tenancy.oc1..aaa3kba",
+	"oci_userId":"ocid1.user.oc1..aaaavxa",
+	"oci_keyFingerprint":"76:d1",
+	"oci_privateKey":"LS0sWm5M03TXNUNm9CtLS0",
+	"snapshot_folder":"file:///myfolder/",
+	"snapshot_password":"snapshotPassword1",
+	"WaitingTime":"120"
+}
