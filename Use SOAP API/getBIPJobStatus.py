@@ -33,7 +33,6 @@ if __name__ == '__main__':
     xml = BeautifulSoup(response.text, 'xml')
     # xml.find('jobId'), to get the jobId tag.
     jobID = xml.find('jobId').string
-    #print(jobID)
 
     payload = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v2="http://xmlns.oracle.com/oxp/service/v2">
                    <soapenv:Header/>
@@ -47,8 +46,7 @@ if __name__ == '__main__':
                    </soapenv:Body>
                 </soapenv:Envelope>"""
 
-    #print(payload)
-    # POST request to execute IBot
+    # POST request to get job status
     response = requests.request("POST", urlScheduleService, headers=headers, data=payload)
     #print(response.text)
     xml = BeautifulSoup(response.text, 'xml')
