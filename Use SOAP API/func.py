@@ -63,7 +63,7 @@ def handler(ctx, data: io.BytesIO = None):
                 oac_report_path = dat.iloc[0][oac_report_path_column]
                 export_file_name_column = args.get("export_file_name")
                 export_file_name = dat.iloc[0][export_file_name_column]
-                logging.getLogger().info("Step1 executed")
+
                 # SOAP request URL
                 urlSession = oac_instance + "/analytics-ws/saw.dll?SoapImpl=nQSessionService"
 
@@ -157,13 +157,11 @@ def handler(ctx, data: io.BytesIO = None):
                 # Save PDF to local disk.
                 with open('/tmp/output.pdf', 'wb') as file:
                     file.write(response_oac.content[start+37:end])
-                logging.getLogger().info("Step3 executed")
+                # Save PDF to ObjectStorage.
                 bucketName1 = "bucket-ivy02-FAAS"
                 dt = datetime.datetime.now()
                 s = dt.strftime("%Y-%m-%d %H:%M:%S")
-
                 output_csv_path1 = "/tmp/output.pdf"
-
                 tt_outputFile = export_file_name + s + ".pdf"
                 write_to_objectstore(bucketName1, tt_outputFile, output_csv_path1)
                 
