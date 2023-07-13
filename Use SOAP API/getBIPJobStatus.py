@@ -2,6 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
+import os
 
 if __name__ == '__main__':
     # SOAP request URL
@@ -54,5 +55,5 @@ if __name__ == '__main__':
     jobStartDate = xml.find('startDate').string
     jobStatus = xml.find('status').string
 
-    print("JobStartDate: " + jobStartDate + " and " + "JobStatus: " + jobStatus)
-
+    print("ReportUrl:" + reportUrl + '\n' +"JobStartDate: " + jobStartDate + '\n' + "JobStatus: " + jobStatus)
+    os.system("pause")
