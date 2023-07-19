@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="b7e8e86e-7765-4497-b8f2-026203c00d78" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestExportReport" searchProperties="true" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testStep type="request" id="15b82846-9bac-4d31-83af-1db874e6b1f5" name="logon"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SAWSessionService</con:interface><con:operation>logon</con:operation><con:request name="logon" id="069e1e62-174f-4be7-981d-17c7ff9b7028"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oac3-nro06scxcg7c-nt.analytics.ocp.oraclecloud.com/analytics-ws/saw.dll?SoapImpl=nQSessionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="urn://oracle.bi.webservices/v12">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v12:logon>
+         <v12:name></v12:name>
+         <v12:password></v12:password>
+      </v12:logon>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="#logon" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 1" id="cb1762e3-867b-4d5f-9888-932d0a2f42c5"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="true" entitize="false" transferChildNodes="false" disabled="false"><con:name>SessionID</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>logon</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace sawsoap='urn://oracle.bi.webservices/v12';
+//sawsoap:logonResult/sawsoap:sessionID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>initiateAnalysisExport</con:targetStep><con:targetPath>declare namespace v12='urn://oracle.bi.webservices/v12';
+//v12:sessionID</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="978d8ee4-71ac-4d09-95c1-316f4ea2bf58" name="initiateAnalysisExport"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnalysisExportViewsService</con:interface><con:operation>initiateAnalysisExport</con:operation><con:request name="initiateAnalysisExport" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="7dd95332-05f8-4f09-a63b-943b772f81b1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oac3-nro06scxcg7c-nt.analytics.ocp.oraclecloud.com/analytics-ws/saw.dll?SoapImpl=analysisExportViewsService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="urn://oracle.bi.webservices/v12">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v12:initiateAnalysisExport>
+         <v12:report>
+            <v12:reportPath>/shared/Sales/Avg Category Revenue by Time</v12:reportPath>
+            <v12:reportXml/>
+         </v12:report>
+         <v12:outputFormat>PDF</v12:outputFormat>
+         <v12:executionOptions>
+            <v12:async>true</v12:async>
+            <v12:useMtom>true</v12:useMtom>
+            <v12:refresh>true</v12:refresh>
+         </v12:executionOptions>
+         <v12:reportParams>
+            <!--Zero or more repetitions:-->
+            <v12:filterExpressions/>
+            <!--Zero or more repetitions:-->
+            <v12:variables>
+               <v12:name/>
+               <v12:value/>
+            </v12:variables>
+            <!--Zero or more repetitions:-->
+            <v12:nameValues>
+               <v12:name/>
+               <v12:value/>
+            </v12:nameValues>
+            <!--Zero or more repetitions:-->
+            <v12:templateInfos>
+               <v12:templateForEach/>
+               <v12:templateIterator/>
+               <!--Zero or more repetitions:-->
+               <v12:instance>
+                  <v12:instanceName/>
+                  <!--Zero or more repetitions:-->
+                  <v12:nameValues>
+                     <v12:name/>
+                     <v12:value/>
+                  </v12:nameValues>
+               </v12:instance>
+            </v12:templateInfos>
+            <!--Optional:-->
+            <v12:viewName/>
+         </v12:reportParams>
+         <v12:reportViewName/>
+         <v12:sessionID>u8gpkges6aaqk3lvlmk6mqo4iclap8v76a2gd98cs3t5pkqtzOr07UFe9WyluvB</v12:sessionID>
+      </v12:initiateAnalysisExport>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="5bdff9a4-0391-4e6c-a3dc-5fd2f3ca56af" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="#initiateAnalysisExport"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 2" id="6a50e555-afc5-485f-8229-4497aec7537c"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="true" entitize="false" transferChildNodes="false" disabled="false"><con:name>SessionID</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>logon</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace sawsoap='urn://oracle.bi.webservices/v12';
+//sawsoap:logonResult/sawsoap:sessionID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>completeAnalysisExport</con:targetStep><con:targetPath>declare namespace v12='urn://oracle.bi.webservices/v12';
+//v12:sessionID</con:targetPath><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" transferToAll="false" ignoreEmpty="false" entitize="false" transferChildNodes="false"><con:name>queryID</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>initiateAnalysisExport</con:sourceStep><con:sourcePath>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace sawsoap='urn://oracle.bi.webservices/v12';
+//sawsoap:initiateAnalysisExportResult/sawsoap:return/sawsoap:queryID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>completeAnalysisExport</con:targetStep><con:targetPath>declare namespace v12='urn://oracle.bi.webservices/v12';
+//v12:queryID</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="delay" name="Delay" id="62132956-cdbd-4e1b-8c1a-061b4d7e6b95"><con:settings/><con:config><delay>5000</delay></con:config></con:testStep><con:testStep type="request" id="273747a7-4325-44ef-a86b-6e1c40af0624" name="completeAnalysisExport"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnalysisExportViewsService</con:interface><con:operation>completeAnalysisExport</con:operation><con:request name="completeAnalysisExport" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c8fccc93-5dc5-41e1-b3c6-8ed5dc1bab1f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oac3-nro06scxcg7c-nt.analytics.ocp.oraclecloud.com/analytics-ws/saw.dll?SoapImpl=analysisExportViewsService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="urn://oracle.bi.webservices/v12">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v12:completeAnalysisExport>
+         <v12:queryID>TSUaYLeXIm2FEBpvyWvL2A</v12:queryID>
+         <v12:sessionID>u8gpkges6aaqk3lvlmk6mqo4iclap8v76a2gd98cs3t5pkqtzOr07UFe9WyluvB</v12:sessionID>
+      </v12:completeAnalysisExport>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="30ab1f9d-fb78-4e3e-9770-bb6fb3ec9845" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="#completeAnalysisExport"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase>
