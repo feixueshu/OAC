@@ -20,24 +20,36 @@ for CONFIG_FILE in "$@"; do
   source ./$CONFIG_FILE
 
   # 設定ファイル内の変数が設定されているか確認
-  if [ -z "$PhysicalLayerSchema" ] || [ -z "$PhysicalLayerDataSource" ] || [ -z "$LogicalLayerBusinessModel" ] || [ -z "$PresentationLayerSubject" ] || [ -z "$GitHubRepository" ] || [ -z "$Branch" ]; then
+  if [ -z "$PhysicalLayerSchema" ] || [ -z "$PhysicalLayerDataSource" ] || [ -z "$LogicalLayerBusinessModel" ] || [ -z "$PresentationLayerSubject" ] || [ -z "$GitHubRepository" ] || [ -z "$Branch" ] || [ -z "$Variables" ]; then
     echo "Error: Missing required variables in $CONFIG_FILE"
     exit 1
   fi
 
   # 指定されたファイルとフォルダを一時ディレクトリに抽出
+
+  # PhysicalLayerSchemaフォルダと.jsonファイルを抽出
   mkdir -p $TEMP_DIR/physical/$PhysicalLayerDataSource
   cp -r $SEMANTIC_MODEL_DIR/physical/$PhysicalLayerDataSource/$PhysicalLayerSchema $TEMP_DIR/physical/$PhysicalLayerDataSource/$PhysicalLayerSchema/
   cp $SEMANTIC_MODEL_DIR/physical/$PhysicalLayerDataSource/$PhysicalLayerSchema.json $TEMP_DIR/physical/$PhysicalLayerDataSource/
   cp $SEMANTIC_MODEL_DIR/physical/$PhysicalLayerDataSource.json $TEMP_DIR/physical/
 
+  # LogicalLayerBusinessModelフォルダと.jsonファイルを抽出
   mkdir -p $TEMP_DIR/logical
   cp -r $SEMANTIC_MODEL_DIR/logical/$LogicalLayerBusinessModel $TEMP_DIR/logical/
   cp $SEMANTIC_MODEL_DIR/logical/$LogicalLayerBusinessModel.json $TEMP_DIR/logical/
 
+  # PresentationLayerSubjectフォルダと.jsonファイルを抽出
   mkdir -p $TEMP_DIR/presentation
   cp -r $SEMANTIC_MODEL_DIR/presentation/$PresentationLayerSubject $TEMP_DIR/presentation/
   cp $SEMANTIC_MODEL_DIR/presentation/$PresentationLayerSubject.json $TEMP_DIR/presentation/
+
+  # Variablesディレクトリの処理
+  IFS=',' read -ra VAR_ARRAY <<< "$Variables"
+  mkdir -p $TEMP_DIR/variables
+  for VAR_FILE in "${VAR_ARRAY[@]}"; do
+    VAR_FILE_TRIM=$(echo $VAR_FILE | xargs)  # 前後の空白を除去
+    cp $SEMANTIC_MODEL_DIR/variables/$VAR_FILE_TRIM.json $TEMP_DIR/variables/
+  done
 
   echo "$CONFIG_FILE の指定されたファイルとフォルダを抽出しました。"
 
